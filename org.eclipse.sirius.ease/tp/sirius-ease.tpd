@@ -17,50 +17,35 @@ location "http://download.eclipse.org/releases/neon/201606221000" eclipse-neon {
 	org.eclipse.emf.databinding.feature.group
 	org.eclipse.emf.databinding.edit.feature.group
 	
-	
-	org.eclipse.emf.ecp.emfforms.idetooling.feature.feature.group
-	org.eclipse.emf.ecp.emfforms.runtime.feature.feature.group
-	org.eclipse.emf.ecp.emfforms.sdk.feature.feature.group
-	
-
-	org.eclipse.emf.mwe2.launcher.feature.group
-	org.eclipse.emf.mwe2.runtime.sdk.feature.group
-	// Xtext
-	org.eclipse.xtext.runtime.feature.group
-	org.eclipse.xtext.xbase.feature.group
-	org.eclipse.xtext.sdk.feature.group
-
-	// SWTBot
-	org.eclipse.swtbot.feature.group
-	org.eclipse.swtbot.eclipse.feature.group
-	
 	org.eclipse.pde.runtime
 	
 
 }
 
 
-location ""/*pydev*/  eclipse-pydev {
+location "https://dl.bintray.com/fabioz/pydev/5.0.0"  eclipse-pydev {
 	org.python.pydev.feature.feature.group
 	
 }
 
 
 
-location "http://download.eclipse.org/sirius/updates/releases/4.1.1/neon" eclipse-sirius {
+location "http://download.eclipse.org/sirius/updates/releases/4.1.4/neon/" eclipse-sirius {
 	org.eclipse.sirius.samples.feature.group	
-	org.eclipse.sirius.specifier.feature.group
+	
+	
 		
 	org.eclipse.sirius.aql.feature.group
 	org.eclipse.sirius.runtime.feature.group	
 	org.eclipse.sirius.runtime.ide.ui.feature.group	
 	org.eclipse.sirius.runtime.aql.feature.group		
-	org.eclipse.sirius.runtime.ide.xtext.feature.group
 	org.eclipse.sirius.runtime.ide.eef.feature.group
 	org.eclipse.sirius.runtime.ide.eef.source.feature.group
 	
 	org.eclipse.sirius.interpreter.feature.feature.group
 	org.eclipse.sirius.properties.feature.feature.group
+	
+	org.eclipse.sirius.specifier.feature.group
 	org.eclipse.sirius.specifier.ide.ui.feature.group
 	org.eclipse.sirius.specifier.ide.ui.aql.feature.group
 	org.eclipse.sirius.specifier.properties.feature.feature.group
@@ -74,11 +59,9 @@ location "http://download.eclipse.org/sirius/updates/releases/4.1.1/neon" eclips
 
 
 
-location "http://download.eclipse.org/ease/" eclipse-ease {
+location "http://download.eclipse.org/ease/update/release" eclipse-ease {
 	org.eclipse.ease.feature.feature.group
 	org.eclipse.ease.feature.source.feature.group
-	org.eclipse.ease.modules.charting.feature.feature.group
-	org.eclipse.ease.modules.charting.feature.source.feature.group
 	org.eclipse.ease.modules.feature.feature.group
 	org.eclipse.ease.modules.feature.source.feature.group
 	org.eclipse.ease.ui.feature.feature.group
@@ -87,7 +70,10 @@ location "http://download.eclipse.org/ease/" eclipse-ease {
 	org.eclipse.ease.lang.python.feature.source.feature.group
 	org.eclipse.ease.lang.python.py4j.feature.feature.group
 	org.eclipse.ease.lang.python.py4j.feature.source.feature.group
-	org.eclipse.ease.modules.modeling.feature.feature.group
-	org.eclipse.ease.modules.modeling.feature.source.feature.group
+
 	
+}
+
+location "https://dl.bintray.com/py4j/py4j-eclipse/0.10.4" {
+	org.py4j.feature.feature.group
 }

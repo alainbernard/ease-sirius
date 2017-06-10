@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde?>
+<!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
+<target name="org.eclipse.sirius.ease.tp" sequenceNumber="1497103560">
+  <locations>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
+      <unit id="org.eclipse.platform.feature.group" version="4.6.0.v20160606-1342"/>
+      <unit id="org.eclipse.equinox.executable.feature.group" version="3.6.300.v20160525-1303"/>
+      <repository id="eclipse-updates" location="http://download.eclipse.org/eclipse/updates/4.6/R-4.6-201606061100"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
+      <unit id="org.eclipse.emf.feature.group" version="2.12.0.v20160526-0356"/>
+      <unit id="org.eclipse.emf.edit.feature.group" version="2.12.0.v20160526-0356"/>
+      <unit id="org.eclipse.emf.edit.ui.feature.group" version="2.12.0.v20160526-0356"/>
+      <unit id="org.eclipse.emf.databinding.feature.group" version="1.4.0.v20160526-0356"/>
+      <unit id="org.eclipse.emf.databinding.edit.feature.group" version="1.4.0.v20160526-0356"/>
+      <unit id="org.eclipse.pde.runtime" version="3.5.0.v20160418-1724"/>
+      <repository id="eclipse-neon" location="http://download.eclipse.org/releases/neon/201606221000"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
+      <unit id="org.python.pydev.feature.feature.group" version="5.0.0.201605051159"/>
+      <repository id="eclipse-pydev" location="https://dl.bintray.com/fabioz/pydev/5.0.0"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
+      <unit id="org.eclipse.sirius.samples.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.aql.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.runtime.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.runtime.ide.ui.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.runtime.aql.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.runtime.ide.eef.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.runtime.ide.eef.source.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.interpreter.feature.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.properties.feature.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.specifier.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.specifier.ide.ui.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.specifier.ide.ui.aql.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.sirius.specifier.properties.feature.feature.group" version="4.1.4.201703211416"/>
+      <unit id="org.eclipse.eef.ext.widgets.reference.feature.feature.group" version="1.9.0.201701271010"/>
+      <unit id="org.eclipse.eef.sdk.feature.feature.group" version="1.9.0.201701271010"/>
+      <repository id="eclipse-sirius" location="http://download.eclipse.org/sirius/updates/releases/4.1.4/neon/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
+      <unit id="org.eclipse.ease.feature.feature.group" version="0.4.0.I201611181551"/>
+      <unit id="org.eclipse.ease.feature.source.feature.group" version="0.4.0.I201611181551"/>
+      <unit id="org.eclipse.ease.modules.feature.feature.group" version="0.4.0.I201610120928"/>
+      <unit id="org.eclipse.ease.modules.feature.source.feature.group" version="0.4.0.I201610120928"/>
+      <unit id="org.eclipse.ease.ui.feature.feature.group" version="0.4.0.I201701130652"/>
+      <unit id="org.eclipse.ease.ui.feature.source.feature.group" version="0.4.0.I201701130652"/>
+      <unit id="org.eclipse.ease.lang.python.feature.feature.group" version="0.4.0.I201611180821"/>
+      <unit id="org.eclipse.ease.lang.python.feature.source.feature.group" version="0.4.0.I201611180821"/>
+      <unit id="org.eclipse.ease.lang.python.py4j.feature.feature.group" version="0.4.0.I201611180818"/>
+      <unit id="org.eclipse.ease.lang.python.py4j.feature.source.feature.group" version="0.4.0.I201611180818"/>
+      <repository id="eclipse-ease" location="http://download.eclipse.org/ease/update/release"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
+      <unit id="org.py4j.feature.feature.group" version="0.10.4.bnd-RaMnLA"/>
+      <repository location="https://dl.bintray.com/py4j/py4j-eclipse/0.10.4"/>
+    </location>
+  </locations>
+</target>
