@@ -2,15 +2,14 @@ loadModule('/SIRIUS');
 
 loadModule('/System/Resources');
 
-
 sample = getFile("workspace://basicfamily.sample/example.basicfamily")
 
-project = createProject("SiriusDemo")
+pname = "SiriusDemo"
+project = createProject(pname)
 
-copyFile(sample, "workspace://SiriusDemo/example.basicfamily")
-target = getFile("workspace://SiriusDemo/example.basicfamily")
+targetPath = "workspace://"+pname+"/example.basicfamily"
+copyFile(sample, targetPath)
+target = getFile(targetPath)
 
 session = createSession(target)
-
-# representation = createRepresentation(target, session)
 
