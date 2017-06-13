@@ -1,0 +1,137 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../../org.eclipse.ease.help/help/css/modules_reference.css" />
+</head>
+<body>
+	<div class="module" title="SIRIUS Module">
+		<h1>SIRIUS Module</h1>
+		<p>A module that provides high-level Sirius functions to be used in any language supported by EASE.</p>
+
+	</div>
+
+	<h2>Method Overview</h2>
+	<table class="functions">
+		<tr>
+			<th>Method</th>
+			<th>Description</th>
+		</tr>
+		<tr>
+			<td><a href="#configureToModeling">configureToModeling</a>()</td>
+			<td>Convert the given project to a ModelingProject.</td>
+		</tr>
+		<tr>
+			<td><a href="#createSession">createSession</a>()</td>
+			<td>Create a Sirius Session for the provided model file.</td>
+		</tr>
+		<tr>
+			<td><a href="#getRepresentation">getRepresentation</a>()</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><a href="#getViewpointsFor">getViewpointsFor</a>()</td>
+			<td>Get the Viewpoint that can be applied to the provided model file.</td>
+		</tr>
+	</table>
+
+
+	<h2>Methods</h2>
+	<div class="command" title="configureToModeling">
+		<h3><a id="configureToModeling">configureToModeling</a></h3>
+		<p class="synopsis">org.eclipse.sirius.business.api.modelingproject.ModelingProject configureToModeling(org.eclipse.core.resources.IProject project)</p>
+
+		<p class="description">Convert the given project to a ModelingProject. This should be called somewhere in 
+ a WorkspaceModifyOperation.</p>
+
+		<table class="parameters">
+			<tr>
+				<th>Parameter</th>
+				<th>Type</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>project</td>
+				<td>org.eclipse.core.resources.IProject</td>
+				<td></td>
+			</tr>
+		</table>
+
+		<p class="return"><em>Returns:</em>org.eclipse.sirius.business.api.modelingproject.ModelingProject ... the project as a ModelingProject.</p>
+
+
+	</div>
+	<div class="command" title="createSession">
+		<h3><a id="createSession">createSession</a></h3>
+		<p class="synopsis">org.eclipse.sirius.business.api.session.Session createSession(org.eclipse.core.resources.IFile modelFile)</p>
+
+		<p class="description">Create a Sirius Session for the provided model file. It uses the first available Viewpoint that 
+ can be applied to the model file and applies it. If <code>initialization</code> is set to <code>true</code> in 
+ the representation definition, then Sirius will create automatically.</p>
+
+		<table class="parameters">
+			<tr>
+				<th>Parameter</th>
+				<th>Type</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>modelFile</td>
+				<td>org.eclipse.core.resources.IFile</td>
+				<td>the file containing the EMF model</td>
+			</tr>
+		</table>
+
+		<p class="return"><em>Returns:</em>org.eclipse.sirius.business.api.session.Session ... the created Sirius session</p>
+
+
+	</div>
+	<div class="command" title="getRepresentation">
+		<h3><a id="getRepresentation">getRepresentation</a></h3>
+		<p class="synopsis">org.eclipse.sirius.viewpoint.DRepresentation getRepresentation(org.eclipse.sirius.business.api.session.Session siriusSession)</p>
+
+		<p class="description"></p>
+
+		<table class="parameters">
+			<tr>
+				<th>Parameter</th>
+				<th>Type</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>siriusSession</td>
+				<td>org.eclipse.sirius.business.api.session.Session</td>
+				<td></td>
+			</tr>
+		</table>
+
+		<p class="return"><em>Returns:</em>org.eclipse.sirius.viewpoint.DRepresentation</p>
+
+
+	</div>
+	<div class="command" title="getViewpointsFor">
+		<h3><a id="getViewpointsFor">getViewpointsFor</a></h3>
+		<p class="synopsis">java.util.Set getViewpointsFor(org.eclipse.core.resources.IFile modelFile)</p>
+
+		<p class="description">Get the Viewpoint that can be applied to the provided model file. It relies on the file extension 
+ to compute the available viewpoints.</p>
+
+		<table class="parameters">
+			<tr>
+				<th>Parameter</th>
+				<th>Type</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>modelFile</td>
+				<td>org.eclipse.core.resources.IFile</td>
+				<td></td>
+			</tr>
+		</table>
+
+		<p class="return"><em>Returns:</em>java.util.Set ... a collection of viewpoints</p>
+
+
+	</div>
+
+</body>
+</html>

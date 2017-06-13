@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="org.eclipse.ease.modules">
-      <module
-            class="org.eclipse.sirius.ease.SiriusModule"
-            id="org.eclipse.sirius.ease.module"
-            name="SIRIUS"
-            visible="true">
+   <extension point="org.eclipse.ease.modules">
+      <module class="org.eclipse.sirius.ease.SiriusModule" id="org.eclipse.sirius.ease.module" name="SIRIUS" visible="true">
       </module>
    </extension>
 
+<extension point="org.eclipse.help.toc">
+<toc file="help/reference.xml" primary="false"/>
+</extension>
 </plugin>
