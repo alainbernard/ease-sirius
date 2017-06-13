@@ -77,3 +77,8 @@ location "http://download.eclipse.org/ease/update/release" eclipse-ease {
 location "https://dl.bintray.com/py4j/py4j-eclipse/0.10.4" {
 	org.py4j.feature.feature.group
 }
+
+location "http://download.eclipse.org/cbi/updates/license" {
+      org.eclipse.license.feature.group
+      
+}

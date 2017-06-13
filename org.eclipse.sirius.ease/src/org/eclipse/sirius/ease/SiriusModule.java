@@ -52,62 +52,12 @@ public class SiriusModule extends AbstractScriptModule {
 		}
 	}
 
+	
 
 	@WrapToScript
 	public Session createSession(IFile modelFile) throws InvocationTargetException, InterruptedException {
 
 		SiriusSessionCreationOperation operation = new SiriusSessionCreationOperation(modelFile);
-		//		  WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
-		//            @Override
-		//            protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
-		//            	IProject project = modelFile.getProject();
-		//            	ModelingProjectManager.INSTANCE.convertToModelingProject(project, monitor);
-		//
-		//            	String fileExtn = modelFile.getFileExtension();
-		//                // get runlog viewpoints from design pluin
-		//                Set<Viewpoint> designViewpoints = new HashSet<>();
-		//                Viewpoint found = null;
-		//                Iterator<Viewpoint> it = ViewpointRegistry.getInstance().getViewpoints().iterator();
-		//                while (it.hasNext() && found == null) {
-		//                	Viewpoint v = it.next();
-		//                	if (v.getModelFileExtension().equalsIgnoreCase(fileExtn)) {
-		//                		found = v;
-		//                		designViewpoints.add(v);
-		//                	}
-		//                }
-		//
-		//                // get Sirius session
-		//                Option<ModelingProject> modelingProject = ModelingProject.asModelingProject(project);
-		//                Session siriusSession = modelingProject.get().getSession();
-		//
-		//                siriusSession.getTransactionalEditingDomain().getResourceSet().getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
-		//
-		//                // create command to set requested viewpoint
-		//                @SuppressWarnings("restriction")
-		//				ChangeViewpointSelectionCommand cc = new ChangeViewpointSelectionCommand(siriusSession, new ViewpointSelectionCallback(), designViewpoints,
-		//                            Collections.<Viewpoint> emptySet(), monitor);
-		//                // execute command
-		//                siriusSession.getTransactionalEditingDomain().getCommandStack().execute(cc);
-
-		//                // change representation name
-		//                final CommandStack commandStack = siriusSession.getTransactionalEditingDomain().getCommandStack();
-		//                commandStack.execute(new RecordingCommand(siriusSession.getTransactionalEditingDomain()) {
-		//                      @Override
-		//                      protected void doExecute() {
-		//                    	  DDiagram dsemanticDiagram = (DDiagram) siriusSession.getSessionResource().getContents().get(1);
-		//                            if(dsemanticDiagram != null){
-		//                                 dsemanticDiagram.setName(project.getName() + " Runlog");
-		//                            }
-		//                      }
-		//                });
-		//
-		//                // open the generated Sirius representation
-		//                DAnalysis root = (DAnalysis) siriusSession.getSessionResource().getContents().get(0);
-		//                DView dView = root.getOwnedViews().get(0);
-		//                DRepresentation myRepresentation = dView.getOwnedRepresentationDescriptors().get(0).getRepresentation();
-		//                DialectUIManager.INSTANCE.openEditor(siriusSession, myRepresentation, monitor);
-		//            }
-		//		  };
 		operation.run(new NullProgressMonitor());
 		Session siriusSession = operation.getCreatedSession();
 		DAnalysis root = (DAnalysis) siriusSession.getSessionResource().getContents().get(0);
@@ -160,10 +110,6 @@ public class SiriusModule extends AbstractScriptModule {
 //		return createdDRepresentation;
 //	}
 
-
-
-	//	@WrapToScript
-	//	public DRe
 
 	private class SiriusSessionCreationOperation extends WorkspaceModifyOperation {
 		private Session createdSession;
