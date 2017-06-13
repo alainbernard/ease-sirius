@@ -13,3 +13,5 @@ target = getFile(targetPath)
 
 session = createSession(target)
 
+repr = getRepresentation(session)
+print repr

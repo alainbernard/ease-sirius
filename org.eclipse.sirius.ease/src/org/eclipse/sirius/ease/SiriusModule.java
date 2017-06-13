@@ -1,9 +1,11 @@
 package org.eclipse.sirius.ease;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
@@ -12,11 +14,21 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ease.modules.AbstractScriptModule;
+import org.eclipse.ease.modules.ScriptParameter;
 import org.eclipse.ease.modules.WrapToScript;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.modelingproject.ModelingProject;
 import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.eclipse.sirius.diagram.business.internal.metamodel.spec.DNodeContainerSpec;
+import org.eclipse.sirius.diagram.description.DiagramElementMapping;
+import org.eclipse.sirius.diagram.description.tool.CreateView;
+import org.eclipse.sirius.diagram.description.tool.ToolFactory;
+import org.eclipse.sirius.ecore.extender.business.api.accessor.exception.FeatureNotFoundException;
+import org.eclipse.sirius.ecore.extender.business.api.accessor.exception.MetaClassNotFoundException;
+import org.eclipse.sirius.ecore.extender.business.api.permission.exception.LockedInstanceException;
 import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.ui.business.api.dialect.DialectUIManager;
 import org.eclipse.sirius.ui.business.api.viewpoint.ViewpointSelectionCallback;
@@ -24,6 +36,7 @@ import org.eclipse.sirius.ui.business.internal.commands.ChangeViewpointSelection
 import org.eclipse.sirius.ui.tools.api.project.ModelingProjectManager;
 import org.eclipse.sirius.viewpoint.DAnalysis;
 import org.eclipse.sirius.viewpoint.DRepresentation;
+import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.DView;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -89,53 +102,93 @@ public class SiriusModule extends AbstractScriptModule {
 		return operation.getCreatedSession();
 	}
 	
+	/**
+	 * Get the representation at the given index created in the provided Sirius session. 
+	 * @param siriusSession
+	 * @param index the index of the representation in the list of all representations in the given session
+	 * @return
+	 */
 	@WrapToScript
-	public DRepresentation getRepresentation(Session siriusSession) {
+	public DRepresentation getRepresentation(Session siriusSession, @ScriptParameter(defaultValue="0")int index) {
 		DAnalysis root = (DAnalysis) siriusSession.getSessionResource().getContents().get(0);
 		DView dView = root.getOwnedViews().get(0);
-		DRepresentation myRepresentation = dView.getOwnedRepresentationDescriptors().get(0).getRepresentation();
+		DRepresentation myRepresentation = dView.getOwnedRepresentationDescriptors().get(index).getRepresentation();
 		return myRepresentation;
 	}
+	
+	/**
+	 * Load the Sirius {@link Session} already opened in the given project. 
+	 * @param project
+	 * @return the session, or <code>null</code> if none
+	 */
+	@WrapToScript
+	public Session loadExistingSession(IProject project) {
+		Option<ModelingProject> modelingProject = ModelingProject.asModelingProject(project);
+		if (modelingProject.some()) {
+			return modelingProject.get().getSession();
+		} else {
+			return null;
+		}
+		
+	}
+	
+	/* END OF EASE VALIDATED FUNCTIONS */
+	
+	@WrapToScript
+	public void invokeTool(Session session, DRepresentation representation) {
+		try {
+			EObject obj = session.getModelAccessor().createInstance("Man");
+			session.getModelAccessor().eAdd(session.getTransactionalEditingDomain().getResourceSet().getResources().get(3).getContents().get(0), "members", obj);
+			System.out.println(obj);
+		} catch (MetaClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LockedInstanceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FeatureNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CreateView createViewOp = ToolFactory.eINSTANCE.createCreateView();
+		List<DiagramElementMapping> maps = getMappings(representation.getRepresentationElements().get(0), session);
+		System.out.println(maps);
+	}
+	
+	private List<DiagramElementMapping> getMappings(final DSemanticDecorator containerView,
+			Session session) {
+		final List<DiagramElementMapping> mappings = new ArrayList<DiagramElementMapping>();
 
+		if (containerView instanceof DSemanticDiagram) {
 
-//	@WrapToScript
-//	public DRepresentation createRepresentation(IFile modelFile, Session siriusSession) throws IOException {
-//		Viewpoint vp = siriusSession.getSelectedViewpoints(false).iterator().next();
-//		RepresentationDescription rdescr = vp.getOwnedRepresentations().get(0);
-//
-//		ResourceSet rset = new ResourceSetImpl();
-//		Resource res = rset.createResource(URI.createPlatformResourceURI(modelFile.getFullPath().toString(), true));
-//		res.load(new HashMap<Object, Object>());
-//		EObject eObject = res.getContents().get(0);
-//
-//		CreateRepresentationCommand command = new CreateRepresentationCommand(siriusSession, rdescr, eObject, "My EASE Diagram", new NullProgressMonitor());
-//		IEditingSession editingSession = SessionUIManager.INSTANCE.getUISession(siriusSession);
-//		editingSession
-//		.notify(EditingSessionEvent.REPRESENTATION_ABOUT_TO_BE_CREATED_BEFORE_OPENING);
-//		siriusSession.getTransactionalEditingDomain().getCommandStack()
-//		.execute(command);
-//		editingSession.notify(EditingSessionEvent.REPRESENTATION_CREATED_BEFORE_OPENING);
-//		DRepresentation createdDRepresentation = command.getCreatedRepresentation();
-//
-//
-//		//		final CommandStack commandStack = siriusSession.getTransactionalEditingDomain().getCommandStack();
-//		//		commandStack.execute(new RecordingCommand(siriusSession.getTransactionalEditingDomain()) {
-//		//			@Override
-//		//			protected void doExecute() {
-//		//				DDiagram dsemanticDiagram = (DDiagram) siriusSession.getSessionResource().getContents().get(1);
-//		//				if(dsemanticDiagram != null){
-//		//					dsemanticDiagram.setName(modelFile.getProject().getName() + " diagram");
-//		//				}
-//		//			}
-//		//		});
-//
-//		// open the generated Sirius representation
-//		//		DAnalysis root = (DAnalysis) siriusSession.getSessionResource().getContents().get(0);
-//		//		DView dView = root.getOwnedViews().get(0);
-//		//		DRepresentation myRepresentation = dView.getOwnedRepresentationDescriptors().get(0).getRepresentation();
-//		DialectUIManager.INSTANCE.openEditor(siriusSession, createdDRepresentation, new NullProgressMonitor());
-//		return createdDRepresentation;
-//	}
+			for (final DiagramElementMapping mapping : ((DSemanticDiagram)containerView).getDescription()
+					.getAllContainerMappings()) {
+				if (!mapping.isCreateElements()) {
+					mappings.add(mapping);
+				}
+			}
+			for (final DiagramElementMapping mapping : ((DSemanticDiagram)containerView).getDescription()
+					.getAllNodeMappings()) {
+				if (!mapping.isCreateElements()) {
+					mappings.add(mapping);
+				}
+			}
+		} else if (containerView instanceof DNodeContainerSpec) {
+			for (final DiagramElementMapping mapping : ((DNodeContainerSpec)containerView).getActualMapping()
+					.getAllContainerMappings()) {
+				if (!mapping.isCreateElements()) {
+					mappings.add(mapping);
+				}
+			}
+			for (final DiagramElementMapping mapping : ((DNodeContainerSpec)containerView).getActualMapping()
+					.getAllNodeMappings()) {
+				if (!mapping.isCreateElements()) {
+					mappings.add(mapping);
+				}
+			}
+		}
+		return mappings;
+	}
 
 
 	private class SiriusSessionCreationOperation extends WorkspaceModifyOperation {
@@ -186,5 +239,7 @@ public class SiriusModule extends AbstractScriptModule {
 			return createdSession;
 		}
 	}
+	
+	
 
 }
