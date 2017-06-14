@@ -16,4 +16,6 @@ Require-Bundle: org.eclipse.help;bundle-version="[3.5.0,4.0.0)",
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.eclipse.sirius.ecore.extender.business.api.accessor
+Bundle-Activator: org.eclipse.sirius.ease.Activator
+Bundle-ActivationPolicy: lazy
 

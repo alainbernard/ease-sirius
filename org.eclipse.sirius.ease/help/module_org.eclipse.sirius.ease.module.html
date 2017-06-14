@@ -25,12 +25,28 @@
 			<td>Create a Sirius Session for the provided model file.</td>
 		</tr>
 		<tr>
+			<td><a href="#getModelRoot">getModelRoot</a>()</td>
+			<td>Get the root of the EMF model displayed in the given representation.</td>
+		</tr>
+		<tr>
 			<td><a href="#getRepresentation">getRepresentation</a>()</td>
-			<td></td>
+			<td>Get the representation at the given index created in the provided Sirius session.</td>
 		</tr>
 		<tr>
 			<td><a href="#getViewpointsFor">getViewpointsFor</a>()</td>
 			<td>Get the Viewpoint that can be applied to the provided model file.</td>
+		</tr>
+		<tr>
+			<td><a href="#invokeAdd">invokeAdd</a>()</td>
+			<td>Invoke an EMF 'Add' operation to add an element to the given feature of the given container.</td>
+		</tr>
+		<tr>
+			<td><a href="#invokeSet">invokeSet</a>()</td>
+			<td>Invoke an EMF 'Set' operation to set a value of an EMF model element.</td>
+		</tr>
+		<tr>
+			<td><a href="#loadExistingSession">loadExistingSession</a>()</td>
+			<td>Load the Sirius Session already opened in the given project.</td>
 		</tr>
 	</table>
 
@@ -85,11 +101,44 @@
 
 
 	</div>
+	<div class="command" title="getModelRoot">
+		<h3><a id="getModelRoot">getModelRoot</a></h3>
+		<p class="synopsis">org.eclipse.emf.ecore.EObject getModelRoot(org.eclipse.sirius.business.api.session.Session session, org.eclipse.sirius.viewpoint.DRepresentation representation, java.lang.String modelFileExtn)</p>
+
+		<p class="description">Get the root of the EMF model displayed in the given representation.</p>
+
+		<table class="parameters">
+			<tr>
+				<th>Parameter</th>
+				<th>Type</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>session</td>
+				<td>org.eclipse.sirius.business.api.session.Session</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>representation</td>
+				<td>org.eclipse.sirius.viewpoint.DRepresentation</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>modelFileExtn</td>
+				<td>java.lang.String</td>
+				<td>the extension of the file containing the EMF model</td>
+			</tr>
+		</table>
+
+		<p class="return"><em>Returns:</em>org.eclipse.emf.ecore.EObject ... the loaded object, or <code>null</code> if not found</p>
+
+
+	</div>
 	<div class="command" title="getRepresentation">
 		<h3><a id="getRepresentation">getRepresentation</a></h3>
-		<p class="synopsis">org.eclipse.sirius.viewpoint.DRepresentation getRepresentation(org.eclipse.sirius.business.api.session.Session siriusSession)</p>
+		<p class="synopsis">org.eclipse.sirius.viewpoint.DRepresentation getRepresentation(org.eclipse.sirius.business.api.session.Session siriusSession, [org.eclipse.sirius.viewpoint.description.Viewpoint index])</p>
 
-		<p class="description"></p>
+		<p class="description">Get the representation at the given index created in the provided Sirius session.</p>
 
 		<table class="parameters">
 			<tr>
@@ -102,9 +151,14 @@
 				<td>org.eclipse.sirius.business.api.session.Session</td>
 				<td></td>
 			</tr>
+			<tr>
+				<td>index</td>
+				<td>org.eclipse.sirius.viewpoint.description.Viewpoint</td>
+				<td>the index of the representation in the list of all representations in the given session<br /><b>Optional:</b> defaults to &lt;<i>0</i>&gt;.</td>
+			</tr>
 		</table>
 
-		<p class="return"><em>Returns:</em>org.eclipse.sirius.viewpoint.DRepresentation</p>
+		<p class="return"><em>Returns:</em>org.eclipse.sirius.viewpoint.DRepresentation ... the representation at the given index, or <code>null</code> if the index is too high</p>
 
 
 	</div>
@@ -129,6 +183,104 @@
 		</table>
 
 		<p class="return"><em>Returns:</em>java.util.Set ... a collection of viewpoints</p>
+
+
+	</div>
+	<div class="command" title="invokeAdd">
+		<h3><a id="invokeAdd">invokeAdd</a></h3>
+		<p class="synopsis">org.eclipse.emf.ecore.EObject invokeAdd(org.eclipse.sirius.business.api.session.Session session, org.eclipse.emf.ecore.EObject container, java.lang.String feature, java.lang.String instanceName)</p>
+
+		<p class="description">Invoke an EMF 'Add' operation to add an element to the given feature of the given container.</p>
+
+		<table class="parameters">
+			<tr>
+				<th>Parameter</th>
+				<th>Type</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>session</td>
+				<td>org.eclipse.sirius.business.api.session.Session</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>container</td>
+				<td>org.eclipse.emf.ecore.EObject</td>
+				<td>the container that will contain the created model element</td>
+			</tr>
+			<tr>
+				<td>feature</td>
+				<td>java.lang.String</td>
+				<td>the name of the containment feature to which the new element will be added</td>
+			</tr>
+			<tr>
+				<td>instanceName</td>
+				<td>java.lang.String</td>
+				<td>the class name of the object to be instantiated</td>
+			</tr>
+		</table>
+
+		<p class="return"><em>Returns:</em>org.eclipse.emf.ecore.EObject ... the created EObject</p>
+
+
+	</div>
+	<div class="command" title="invokeSet">
+		<h3><a id="invokeSet">invokeSet</a></h3>
+		<p class="synopsis">void invokeSet(org.eclipse.sirius.business.api.session.Session session, org.eclipse.emf.ecore.EObject container, java.lang.String feature, java.lang.Object value)</p>
+
+		<p class="description">Invoke an EMF 'Set' operation to set a value of an EMF model element.</p>
+
+		<table class="parameters">
+			<tr>
+				<th>Parameter</th>
+				<th>Type</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>session</td>
+				<td>org.eclipse.sirius.business.api.session.Session</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>container</td>
+				<td>org.eclipse.emf.ecore.EObject</td>
+				<td>the element that will be modified</td>
+			</tr>
+			<tr>
+				<td>feature</td>
+				<td>java.lang.String</td>
+				<td>the name of the feature that will be modified</td>
+			</tr>
+			<tr>
+				<td>value</td>
+				<td>java.lang.Object</td>
+				<td>the value to be set</td>
+			</tr>
+		</table>
+
+
+
+	</div>
+	<div class="command" title="loadExistingSession">
+		<h3><a id="loadExistingSession">loadExistingSession</a></h3>
+		<p class="synopsis">org.eclipse.sirius.business.api.session.Session loadExistingSession(org.eclipse.core.resources.IProject project)</p>
+
+		<p class="description">Load the Sirius Session already opened in the given project.</p>
+
+		<table class="parameters">
+			<tr>
+				<th>Parameter</th>
+				<th>Type</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>project</td>
+				<td>org.eclipse.core.resources.IProject</td>
+				<td></td>
+			</tr>
+		</table>
+
+		<p class="return"><em>Returns:</em>org.eclipse.sirius.business.api.session.Session ... the session, or <code>null</code> if none</p>
 
 
 	</div>
